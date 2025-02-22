@@ -17,10 +17,10 @@ pipeline {
     stage ('Run Test'){
       environment{
         // assuming you have stored the credentials with this name
-        DOCKER_HUB = credentials('dockerhub-creds')
+        DOCKER_HUB = credentials('dockerhub-credentials')
       }
       steps{
-        bat 'echo ${DOCKER_HUB_PSW} | docker login -u ${DOCKER_HUB_USR} --password-stdin'
+        bat 'echo %DOCKER_HUB_PSW% | docker login -u %DOCKER_HUB_USR% --password-stdin'
         bat "docker-compose -f test-suites.yaml up --pull=always"
 	script {
 	  if(fileExists('output/flight-reservation/testng-failed.xml') || fileExists('output/vendor-portal/testng-failed.xml')) {
