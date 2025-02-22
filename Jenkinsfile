@@ -21,6 +21,8 @@ pipeline {
     always {
       bat "docker-compose -f grid.yaml down"
       bat "docker-compose -f test-suites.yaml down"
+      archiveArtifacts aftifacts: 'output/flight-reservation/emailable-report.html', followSymLinks: false
+      archiveArtifacts aftifacts: 'output/vendor-portal/emailable-report.html', followSymLinks: false
     }
   }
 
